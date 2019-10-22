@@ -13,7 +13,7 @@ exports.verifyConditions = async function verifyConditions(config) {
     throw new SemanticReleaseError(`process.env.${config.sentryTokenVar} must be a string`);
   }
 
-  if (typeof config.networkConcurrency !== 'number') {
+  if (typeof config.networkConcurrency !== 'undefined' && typeof config.networkConcurrency !== 'number') {
     throw new SemanticReleaseError(`config.networkConcurrency must be integer greater than 0`);
   }
 }
