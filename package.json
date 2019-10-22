@@ -2,7 +2,7 @@
   "name": "semantic-release-sentry",
   "version": "1.0.3",
   "main": "index.js",
-  "repository": "https://github.com/github.com:DevSide/semantic-release-sentry",
+  "repository": "https://github.com/DevSide/semantic-release-sentry",
   "author": "DevSide <DevSide@github.com>",
   "license": "MIT",
   "description": "semantic-release plugin to resolve Sentry issues via commit messages",

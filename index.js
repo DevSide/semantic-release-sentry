@@ -25,7 +25,7 @@ function getIssuesFromCommits (context) {
     const matches = commit.message.match(REGEXP_ISSUE) || [];
 
     for (const match of matches) {
-      issues.add(match);
+      issues.push(match);
       context.logger.info(`Found Sentry issue ${match} in commit: ${commit.commit.short}`);
     }
   }
