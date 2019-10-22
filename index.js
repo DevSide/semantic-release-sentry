@@ -26,8 +26,8 @@ function getIssuesFromCommits (context) {
     while ((match = REGEXP_ISSUE.exec(commit.message)) !== null) {
       issueId = match[1]
       if (issueId) {
-        issues.push(issueId);
-        context.logger.info(`Found Sentry issue ${issueId} in commit: ${commit.commit.short}`);
+        issues.push(issueId)
+        context.logger.info(`Found Sentry issue ${issueId} in commit: ${commit.commit.short}`)
       }
     }
   }
@@ -50,12 +50,12 @@ async function setIssueAsResolved (config, context, issueId) {
     })
   } catch (error) {
     console.error(error)
-    logger.error(`Network problem, unable to update Sentry issue ${issueId}`);
+    logger.error(`Network problem, unable to update Sentry issue ${issueId}`)
     return
   }
 
   if (response.status >= 200 && response.status < 300) {
-    logger.success(`Sentry issue ${issueId} status set to "resolvedInNextRelease"`);
+    logger.success(`Sentry issue ${issueId} status set to "resolvedInNextRelease"`)
     return
   }
 
@@ -63,7 +63,7 @@ async function setIssueAsResolved (config, context, issueId) {
     console.error(await response.text())
   } catch (error) {}
 
-  logger.error(`Http failed "${response.statusText}", unable to update Sentry issue ${issueId}`);
+  logger.error(`Http failed "${response.statusText}", unable to update Sentry issue ${issueId}`)
 }
 
 exports.success = async function success(config, context) {
