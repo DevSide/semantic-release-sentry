@@ -1,4 +1,4 @@
-# semantic-release-jira
+# semantic-release-sentry
 
 NOT READY YET.<br/>
 semantic-release plugin to resolve Sentry issues via commit messages
@@ -6,7 +6,7 @@ semantic-release plugin to resolve Sentry issues via commit messages
 ## Install
 
 ```bash
-$ npm install semantic-release-jira -D
+$ npm install semantic-release-sentry -D
 ```
 
 ## Usage
@@ -16,7 +16,7 @@ The plugin can be configured in the [**semantic-release** configuration file](ht
 ```json5
 {
   "plugins": [
-    ["semantic-release-jira", {
+    ["semantic-release-sentry", {
       // required, environment variable which stores the token value
       "sentryTokenVar": "SENTRY_TOKEN",
 
