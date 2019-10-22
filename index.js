@@ -70,7 +70,7 @@ async function setIssueAsResolved (config, context, issueId) {
 exports.success = async function success(config, context) {
   const limitConcurrency = pLimit(config.networkConcurrency || 20)
   const issues = getIssuesFromCommits(context)
-  const promises = issues.map(issueId => limitConcurrency(setIssueAsResolved(config, context, issueId)))
+  const promises = issues.map(issueId => limitConcurrency(() => setIssueAsResolved(config, context, issueId)))
 
   return Promise.all(promises)
 }
