@@ -10,5 +10,13 @@
     "@semantic-release/error": "^2.2.0",
     "node-fetch": "^2.6.0",
     "p-limit": "^2.2.1"
+  },
+  "devDependencies": {
+    "@semantic-release/commit-analyzer": "^6.3.0",
+    "@semantic-release/git": "^7.0.16",
+    "@semantic-release/github": "^5.5.4",
+    "@semantic-release/npm": "^5.2.0",
+    "@semantic-release/release-notes-generator": "^7.3.0",
+    "semantic-release": "^15.13.27"
   }
 }
