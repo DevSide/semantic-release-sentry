@@ -37,14 +37,19 @@ async function setIssueAsResolved (config, context, issueId) {
   let response
 
   try {
-    response = await fetch(`https://sentry.io/api/0/issues/${issueId}/`, {
-      method: 'PUT',
-      body: `{"status":"resolvedInNextRelease"}`,
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${process.env[config.sentryTokenVar]}`
-      }
-    })
+    if (config.dryRun) {
+      response = await fetch(`https://sentry.io/api/0/issues/${issueId}/`, {
+        method: 'PUT',
+        body: `{"status":"resolvedInNextRelease"}`,
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${process.env[config.sentryTokenVar]}`
+        }
+      })
+    } else {
+      context.logger.info(`Sentry issue ${issueId} update status skipped.`);
+      return
+    }
   } catch (error) {
     console.error(error)
     throw new SemanticReleaseError(`Network problem, unable to update Sentry issue ${issueId}`);
