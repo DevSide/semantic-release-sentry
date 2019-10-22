@@ -37,7 +37,7 @@ async function setIssueAsResolved (config, context, issueId) {
   let response
 
   try {
-    if (config.dryRun) {
+    if (!config.dryRun) {
       response = await fetch(`https://sentry.io/api/0/issues/${issueId}/`, {
         method: 'PUT',
         body: `{"status":"resolvedInNextRelease"}`,
