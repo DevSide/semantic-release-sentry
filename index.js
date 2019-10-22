@@ -20,13 +20,15 @@ exports.verifyConditions = async function verifyConditions(config) {
 
 function getIssuesFromCommits (context) {
   const issues = []
+  let match, issueId
 
   for (const commit of context.commits) {
-    const matches = commit.message.match(REGEXP_ISSUE) || [];
-
-    for (const match of matches) {
-      issues.push(match);
-      context.logger.info(`Found Sentry issue ${match} in commit: ${commit.commit.short}`);
+    while ((match = REGEXP_ISSUE.exec(commit.message)) !== null) {
+      issueId = match[1]
+      if (issueId) {
+        issues.push(issueId);
+        context.logger.info(`Found Sentry issue ${issueId} in commit: ${commit.commit.short}`);
+      }
     }
   }
 
