@@ -35,28 +35,25 @@ function getIssuesFromCommits (context) {
 
 async function setIssueAsResolved (config, context, issueId) {
   let response
+  const { logger } = context
 
   try {
-    if (!config.dryRun) {
-      response = await fetch(`https://sentry.io/api/0/issues/${issueId}/`, {
-        method: 'PUT',
-        body: `{"status":"resolvedInNextRelease"}`,
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${process.env[config.sentryTokenVar]}`
-        }
-      })
-    } else {
-      context.logger.info(`Sentry issue ${issueId} update status skipped.`);
-      return
-    }
+    response = await fetch(`https://sentry.io/api/0/issues/${issueId}/`, {
+      method: 'PUT',
+      body: `{"status":"resolvedInNextRelease"}`,
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${process.env[config.sentryTokenVar]}`
+      }
+    })
   } catch (error) {
     console.error(error)
-    throw new SemanticReleaseError(`Network problem, unable to update Sentry issue ${issueId}`);
+    logger.error(`Network problem, unable to update Sentry issue ${issueId}`);
+    return
   }
 
   if (response.status >= 200 && response.status < 300) {
-    context.logger.info(`Sentry issue ${issueId} status set to "resolvedInNextRelease"`);
+    logger.success(`Sentry issue ${issueId} status set to "resolvedInNextRelease"`);
     return
   }
 
@@ -64,7 +61,7 @@ async function setIssueAsResolved (config, context, issueId) {
     console.error(await response.text())
   } catch (error) {}
 
-  throw new SemanticReleaseError(`Http failed "${response.statusText}", unable to update Sentry issue ${issueId}`);
+  logger.error(`Http failed "${response.statusText}", unable to update Sentry issue ${issueId}`);
 }
 
 exports.success = async function success(config, context) {
