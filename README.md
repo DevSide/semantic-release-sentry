@@ -1,6 +1,5 @@
 # semantic-release-sentry
 
-NOT READY YET.<br/>
 semantic-release plugin to resolve Sentry issues via commit messages
 
 ## Install

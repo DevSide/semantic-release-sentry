@@ -1,0 +1,26 @@
+{
+  "branch": "master",
+  "repositoryUrl": "git@gitlab.com:homeserve/websites/core_front.git",
+  "debug": true,
+  "dryRun": false,
+  "ci": false,
+  "plugins": [
+    "@semantic-release/npm",
+    ["@semantic-release/git", {
+      "assets": ["package.json"],
+      "message": "chore(release): v${nextRelease.version}"
+    }],
+    "@semantic-release/commit-analyzer",
+    "@semantic-release/release-notes-generator",
+    "@semantic-release/gitlab",
+    ["semantic-release-jira-releases", {
+      "projectId": "SC",
+      "releaseNameTemplate": "front-v${version}",
+      "jiraHost": "homeserve.atlassian.net",
+      "ticketPrefixes": ["SC"]
+    }],
+    ["semantic-release-sentry", {
+      "sentryTokenVar": "SENTRY_TOKEN_ISSUE_UPDATE",
+    }]
+  ]
+}
