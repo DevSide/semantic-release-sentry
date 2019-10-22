@@ -1,6 +1,6 @@
 {
   "name": "semantic-release-sentry",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "index.js",
   "repository": "git@github.com:DevSide/semantic-release-sentry.git",
   "author": "DevSide <DevSide@github.com>",
