@@ -8,7 +8,7 @@
   "description": "semantic-release plugin to resolve Sentry issues via commit messages",
   "dependencies": {
     "@semantic-release/error": "^2.2.0",
-    "node-fetch": "^2.6.0",
+    "node-fetch": "^3.1.1",
     "p-limit": "^2.2.1"
   },
   "devDependencies": {
